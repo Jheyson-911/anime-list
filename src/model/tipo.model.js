@@ -11,6 +11,14 @@ const tipo = connection.define(
     },
     nombre: {
       type: DataTypes.STRING,
+      allowNull: true,
+      unique: true,
+      validate: {
+        isAlpha: {
+          args: true,
+          msg: 'Solamente se acepta palabras',
+        },
+      },
     },
   },
   {

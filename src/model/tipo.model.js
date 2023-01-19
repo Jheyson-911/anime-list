@@ -16,6 +16,7 @@ const tipo = connection.define(
   {
     freezeTableName: true,
     comment: 'Este modelo representa la tabla de tipo',
+    timestamps: false,
   }
 );
 

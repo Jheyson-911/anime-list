@@ -1,5 +1,6 @@
 import { DataTypes } from 'sequelize';
 import connection from '../db/db.js';
+import tipo from './tipo.model.js';
 
 const anime = connection.define(
   'Animes',
@@ -30,5 +31,16 @@ const anime = connection.define(
     comment: 'Este modelo representa la tabla de animes',
   }
 );
-
+anime.belongsToMany(tipo, {
+  through: 'Anime_Tipo',
+  foreignKey: 'anime_Id',
+  timestamps: false,
+});
+tipo.belongsToMany(anime, {
+  through: 'Anime_Tipo',
+  foreignKey: 'tipo_Id',
+  constraints: false,
+  timestamps: false,
+});
+// Asociacion con el modelo Tipo
 export default anime;

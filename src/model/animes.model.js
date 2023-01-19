@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize';
 import connection from '../db/db.js';
 import tipo from './tipo.model.js';
+import etiqueta from './etiquetas.model.js';
 
 const anime = connection.define(
   'Animes',
@@ -31,6 +32,9 @@ const anime = connection.define(
     comment: 'Este modelo representa la tabla de animes',
   }
 );
+
+// Asociacion con el modelo Tipo
+
 anime.belongsToMany(tipo, {
   through: 'Anime_Tipo',
   foreignKey: 'anime_Id',
@@ -42,5 +46,18 @@ tipo.belongsToMany(anime, {
   constraints: false,
   timestamps: false,
 });
-// Asociacion con el modelo Tipo
+
+// Asociacion del modelo Etiqueta
+anime.belongsToMany(etiqueta, {
+  through: 'Anime_etiqueta',
+  foreignKey: 'anime_Id',
+  timestamps: false,
+});
+
+etiqueta.belongsToMany(anime, {
+  through: 'Anime_etiqueta',
+  foreignKey: 'etiqueta_Id',
+  timestamps: false,
+});
+
 export default anime;

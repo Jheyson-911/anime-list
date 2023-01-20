@@ -63,6 +63,7 @@ export const createAnime = async (req, res) => {
       favorito,
       url_img,
       calificacion,
+      user_Id: req.id,
     });
     return res.status(201).json({
       message: 'Anime creado correctamente',
@@ -93,8 +94,8 @@ export const updateAnime = async (req, res) => {
       .json({ message: 'Complete todos los campos', data: [] });
   try {
     const anime = await Anime.update(
-      { where: { id } },
-      { nombre, descripcion, visto, favorito, url_img, calificacion }
+      { nombre, descripcion, visto, favorito, url_img, calificacion },
+      { where: { id, user_Id: req.id } }
     );
     return res.status(201).json({
       message: 'Anime actualizado correctamente',
@@ -114,7 +115,7 @@ export const deleteAnime = async (req, res) => {
       .status(400)
       .json({ message: 'Complete todos los campos', data: [] });
   try {
-    const anime = await Anime.destroy({ where: { id } });
+    const anime = await Anime.destroy({ where: { id, user_Id: req.id } });
     return res.status(201).json({
       message: 'Anime eliminado correctamente',
       data: anime,
@@ -122,6 +123,36 @@ export const deleteAnime = async (req, res) => {
   } catch (err) {
     return res.status(404).json({
       message: 'Ocurrio un error al eleiminar el anime',
+      data: err,
+    });
+  }
+};
+
+// Funciones para cada usuario
+
+export const getAnimeByUser = async (req, res) => {
+  const { id } = req;
+  if (!(id > 0)) {
+    return res.status(400).json({
+      message: 'Ingrese el id a buscar',
+      data: [],
+    });
+  }
+  try {
+    const anime = await Anime.findAll({ where: { user_Id: req.id } });
+    if (anime === null) {
+      return res.status(404).json({
+        message: 'El anime no existe',
+        data: [],
+      });
+    }
+    return res.status(201).json({
+      message: 'Anime encontrado',
+      data: anime,
+    });
+  } catch (err) {
+    return res.status(404).json({
+      message: 'Ocurrio un error al buscar el anime',
       data: err,
     });
   }

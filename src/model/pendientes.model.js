@@ -12,7 +12,6 @@ const pendientes = connection.define(
     nombre: {
       type: DataTypes.STRING,
       allowNull: true,
-      unique: true,
       comment: 'Campo donde ira el nombre del anime',
     },
   },

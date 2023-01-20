@@ -14,7 +14,6 @@ const anime = connection.define(
     nombre: {
       type: DataTypes.STRING,
       allowNull: true,
-      unique: true,
       comment: 'Campo donde ira el nombre del anime',
     },
     descripcion: {
@@ -51,10 +50,6 @@ const anime = connection.define(
       type: DataTypes.STRING,
       comment: 'Campo para almacenar la url de la portada del anime',
       validate: {
-        isUppercase: {
-          args: true,
-          msg: 'Solamente se aceptan mayusculas',
-        },
         isUrl: {
           args: true,
           msg: 'Ingrese una url valida',

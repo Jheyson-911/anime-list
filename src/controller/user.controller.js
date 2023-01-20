@@ -1,5 +1,9 @@
+import * as dotenv from 'dotenv';
 import bcrypjs from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import User from '../model/user.model.js';
+
+dotenv.config();
 
 export const register = async (req, res) => {
   const { email, password, rol } = req.body;
@@ -54,9 +58,12 @@ export const login = async (req, res) => {
         data: [],
       });
     }
+    const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
+      expiresIn: '10days',
+    });
     return res.status(201).json({
       message: 'Usuario logueado',
-      data: user,
+      data: [{ token }, user],
     });
   } catch (err) {
     return res.status(404).json({

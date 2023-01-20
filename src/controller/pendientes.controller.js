@@ -83,7 +83,6 @@ export const updatePendiente = async (req, res) => {
       data: pendiente,
     });
   } catch (err) {
-    console.log(err);
     return res.status(404).json({
       message: 'Ocurrio un error al actualizar el Pendiente',
       data: err,

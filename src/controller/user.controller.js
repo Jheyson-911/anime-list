@@ -24,7 +24,6 @@ export const register = async (req, res) => {
       data: user,
     });
   } catch (err) {
-    console.log(err);
     return res.status(404).json({
       message: 'Ocurrio un error al crear el usuario',
       data: err,

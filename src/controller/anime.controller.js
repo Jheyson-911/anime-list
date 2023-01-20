@@ -122,7 +122,7 @@ export const deleteAnime = async (req, res) => {
     });
   } catch (err) {
     return res.status(404).json({
-      message: 'Ocurrio un error al eleiminar el anime',
+      message: 'Ocurrio un error al eliminar el anime',
       data: err,
     });
   }

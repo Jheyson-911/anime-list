@@ -49,8 +49,15 @@ export const getAnimeById = async (req, res) => {
   }
 };
 export const createAnime = async (req, res) => {
-  const { nombre, descripcion, visto, favorito, url_img, calificacion } =
-    req.body;
+  const {
+    nombre,
+    descripcion,
+    visto,
+    favorito,
+    url_img,
+    calificacion,
+    lista_id,
+  } = req.body;
   if (!nombre || !url_img || !calificacion)
     return res
       .status(400)
@@ -65,6 +72,7 @@ export const createAnime = async (req, res) => {
       calificacion,
       user_Id: req.id,
     });
+    anime.setTipos(lista_id);
     return res.status(201).json({
       message: 'Anime creado correctamente',
       data: anime,

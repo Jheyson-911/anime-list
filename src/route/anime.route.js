@@ -5,6 +5,7 @@ import {
   getAnimeById,
   getAnimeByUser,
   getAnimes,
+  getAnimeVistos,
   updateAnime,
 } from '../controller/anime.controller.js';
 import jwtVerify from '../middleware/jwt.middleware.js';
@@ -16,5 +17,6 @@ router.get('/animes/:id', jwtVerify, getAnimeById);
 router.put('/animes/:id', jwtVerify, updateAnime);
 router.delete('/animes/:id', jwtVerify, deleteAnime);
 router.post('/animes', jwtVerify, createAnime);
+router.get('/animes/mine/vistos', jwtVerify, getAnimeVistos);
 
 export default router;

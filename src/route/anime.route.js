@@ -5,6 +5,7 @@ import {
   getAnimeById,
   getAnimeByUser,
   getAnimes,
+  getAnimesByFavoritos,
   getAnimeVistos,
   updateAnime,
 } from '../controller/anime.controller.js';
@@ -18,5 +19,6 @@ router.put('/animes/:id', jwtVerify, updateAnime);
 router.delete('/animes/:id', jwtVerify, deleteAnime);
 router.post('/animes', jwtVerify, createAnime);
 router.get('/animes/mine/vistos', jwtVerify, getAnimeVistos);
+router.get('/animes/mine/favoritos', jwtVerify, getAnimesByFavoritos);
 
 export default router;

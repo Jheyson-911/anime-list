@@ -165,3 +165,20 @@ export const getAnimeByUser = async (req, res) => {
     });
   }
 };
+
+export const getAnimeVistos = async (req, res) => {
+  try {
+    const anime = await Anime.findAll({
+      where: { visto: 'SI', user_Id: req.id },
+    });
+    return res.status(201).json({
+      message: 'Lista de anime vistos',
+      data: anime,
+    });
+  } catch (err) {
+    return res.status(404).json({
+      message: 'Ocurrio un error al buscar animes vistos',
+      data: err,
+    });
+  }
+};

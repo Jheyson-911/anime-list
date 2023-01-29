@@ -6,6 +6,7 @@ import {
   getAnimeByUser,
   getAnimes,
   getAnimesByCalificacion,
+  getAnimesByEtiqueta,
   getAnimesByFavoritos,
   getAnimesByTipo,
   getAnimeVistos,
@@ -28,5 +29,6 @@ router.get(
   getAnimesByCalificacion
 );
 router.get('/animes/mine/tipo/:tipo', jwtVerify, getAnimesByTipo);
+router.get('/animes/mine/etiqueta/:tag', jwtVerify, getAnimesByEtiqueta);
 
 export default router;

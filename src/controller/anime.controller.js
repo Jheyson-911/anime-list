@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import Anime from '../model/animes.model.js';
+import Tipo from '../model/tipo.model.js';
 
 export const getAnimes = async (req, res) => {
   try {
@@ -56,7 +57,8 @@ export const createAnime = async (req, res) => {
     favorito,
     url_img,
     calificacion,
-    lista_id,
+    lista_tipos_id,
+    lista_etiquetas_id,
   } = req.body;
   if (!nombre || !url_img || !calificacion)
     return res
@@ -72,7 +74,8 @@ export const createAnime = async (req, res) => {
       calificacion,
       user_Id: req.id,
     });
-    anime.setTipos(lista_id);
+    anime.setTipos(lista_tipos_id);
+    anime.setEtiquetas(lista_etiquetas_id);
     return res.status(201).json({
       message: 'Anime creado correctamente',
       data: anime,
@@ -232,6 +235,30 @@ export const getAnimesByCalificacion = async (req, res) => {
   } catch (err) {
     return res.status(404).json({
       message: 'Ocurrio un error al buscar el animes por calificacion',
+      data: err,
+    });
+  }
+};
+
+export const getAnimesByTipo = async (req, res) => {
+  const { tipo } = req.params;
+  try {
+    const anime = await Anime.findAll({
+      include: [
+        {
+          model: Tipo,
+          where: { nombre: tipo },
+          attributes: ['nombre'],
+        },
+      ],
+    });
+    return res.json({
+      message: 'Lista de los animes',
+      data: anime,
+    });
+  } catch (err) {
+    return res.status(404).json({
+      message: 'Ocurrio un error al buscar los animes por tipo',
       data: err,
     });
   }

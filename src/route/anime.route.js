@@ -12,12 +12,13 @@ import {
   getAnimeVistos,
   updateAnime,
 } from '../controller/anime.controller.js';
+import isAdmin from '../middleware/isAdmin.middleware.js';
 import jwtVerify from '../middleware/jwt.middleware.js';
 
 const router = new Router();
-router.get('/animes', jwtVerify, getAnimes);
+router.get('/animes', jwtVerify, isAdmin, getAnimes);
 router.get('/animes/mine', jwtVerify, getAnimeByUser);
-router.get('/animes/:id', jwtVerify, getAnimeById);
+router.get('/animes/:id', jwtVerify, isAdmin, getAnimeById);
 router.put('/animes/:id', jwtVerify, updateAnime);
 router.delete('/animes/:id', jwtVerify, deleteAnime);
 router.post('/animes', jwtVerify, createAnime);

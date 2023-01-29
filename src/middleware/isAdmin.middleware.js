@@ -1,5 +1,6 @@
 import User from '../model/user.model.js';
 
+// eslint-disable-next-line consistent-return
 const isAdmin = async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { id: req.id } });
@@ -11,7 +12,6 @@ const isAdmin = async (req, res, next) => {
     }
     next();
   } catch (err) {
-    console.log(err);
     return res.status(404).json({
       message: 'Ocurrio un error al validar el rol',
       data: err,

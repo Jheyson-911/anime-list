@@ -7,6 +7,7 @@ import {
   getAnimes,
   getAnimesByCalificacion,
   getAnimesByFavoritos,
+  getAnimesByTipo,
   getAnimeVistos,
   updateAnime,
 } from '../controller/anime.controller.js';
@@ -26,5 +27,6 @@ router.get(
   jwtVerify,
   getAnimesByCalificacion
 );
+router.get('/animes/mine/tipo/:tipo', jwtVerify, getAnimesByTipo);
 
 export default router;

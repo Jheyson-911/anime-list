@@ -171,6 +171,12 @@ export const getAnimeVistos = async (req, res) => {
     const anime = await Anime.findAll({
       where: { visto: 'SI', user_Id: req.id },
     });
+    if (anime.length === 0) {
+      return res.status(404).json({
+        message: 'No tienes animes vistos',
+        data: [],
+      });
+    }
     return res.status(201).json({
       message: 'Lista de anime vistos',
       data: anime,
@@ -178,6 +184,29 @@ export const getAnimeVistos = async (req, res) => {
   } catch (err) {
     return res.status(404).json({
       message: 'Ocurrio un error al buscar animes vistos',
+      data: err,
+    });
+  }
+};
+
+export const getAnimesByFavoritos = async (req, res) => {
+  try {
+    const anime = await Anime.findAll({
+      where: { favorito: 'SI', user_Id: req.id },
+    });
+    if (anime.length === 0) {
+      return res.status(404).json({
+        message: 'No tienes animes favoritos',
+        data: [],
+      });
+    }
+    return res.status(201).json({
+      message: 'Lista de animes favoritos',
+      data: anime,
+    });
+  } catch (err) {
+    return res.status(404).json({
+      message: 'Ocurrio un error al buscar el anime',
       data: err,
     });
   }

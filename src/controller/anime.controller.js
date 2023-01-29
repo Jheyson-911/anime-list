@@ -211,3 +211,28 @@ export const getAnimesByFavoritos = async (req, res) => {
     });
   }
 };
+
+export const getAnimesByCalificacion = async (req, res) => {
+  let { num } = req.params;
+  num = parseFloat(num);
+  try {
+    const anime = await Anime.findAll({
+      where: { calificacion: num, user_Id: req.id },
+    });
+    if (anime.length === 0) {
+      return res.status(404).json({
+        message: 'No tienes animes con la calificacion solicitada',
+        data: [],
+      });
+    }
+    return res.status(201).json({
+      message: 'Lista de animes por calificacion',
+      data: anime,
+    });
+  } catch (err) {
+    return res.status(404).json({
+      message: 'Ocurrio un error al buscar el animes por calificacion',
+      data: err,
+    });
+  }
+};

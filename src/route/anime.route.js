@@ -5,6 +5,7 @@ import {
   getAnimeById,
   getAnimeByUser,
   getAnimes,
+  getAnimesByCalificacion,
   getAnimesByFavoritos,
   getAnimeVistos,
   updateAnime,
@@ -20,5 +21,10 @@ router.delete('/animes/:id', jwtVerify, deleteAnime);
 router.post('/animes', jwtVerify, createAnime);
 router.get('/animes/mine/vistos', jwtVerify, getAnimeVistos);
 router.get('/animes/mine/favoritos', jwtVerify, getAnimesByFavoritos);
+router.get(
+  '/animes/mine/calificacion/:num',
+  jwtVerify,
+  getAnimesByCalificacion
+);
 
 export default router;

@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import Anime from '../model/animes.model.js';
+import Etiqueta from '../model/etiquetas.model.js';
 import Tipo from '../model/tipo.model.js';
 
 export const getAnimes = async (req, res) => {
@@ -259,6 +260,30 @@ export const getAnimesByTipo = async (req, res) => {
   } catch (err) {
     return res.status(404).json({
       message: 'Ocurrio un error al buscar los animes por tipo',
+      data: err,
+    });
+  }
+};
+
+export const getAnimesByEtiqueta = async (req, res) => {
+  const { tag } = req.params;
+  try {
+    const anime = await Anime.findAll({
+      include: [
+        {
+          model: Etiqueta,
+          where: { nombre: tag },
+          attributes: ['nombre'],
+        },
+      ],
+    });
+    return res.json({
+      message: 'Lista de los animes',
+      data: anime,
+    });
+  } catch (err) {
+    return res.status(404).json({
+      message: 'Ocurrio un error al buscar los animes por etiqueta',
       data: err,
     });
   }

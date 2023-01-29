@@ -1,5 +1,6 @@
 import User from '../model/user.model.js';
 
+// eslint-disable-next-line consistent-return
 const isAdmin = async (req, res, next) => {
   try {
     const user = await User.findOne({ where: { id: req.id } });

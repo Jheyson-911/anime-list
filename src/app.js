@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import authRoutes from './route/user.route.js';
 import pendienteRoutes from './route/pendiente.route.js';
 import animeRoutes from './route/anime.route.js';
@@ -7,6 +8,7 @@ import etiquetaRoutes from './route/etiqueta.route.js';
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get('/', (req, res) => {
   res.json({

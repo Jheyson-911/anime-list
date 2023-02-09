@@ -11,7 +11,7 @@ import jwtVerify from '../middleware/jwt.middleware.js';
 
 const router = new Router();
 
-router.get('/tipos', jwtVerify, isAdmin, getTipo);
+router.get('/tipos', jwtVerify, getTipo);
 router.get('/tipos/:id', jwtVerify, isAdmin, getTipoById);
 router.put('/tipos/:id', jwtVerify, isAdmin, updateTipo);
 router.post('/tipos', jwtVerify, isAdmin, createTipo);

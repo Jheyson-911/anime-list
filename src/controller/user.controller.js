@@ -63,7 +63,7 @@ export const login = async (req, res) => {
     });
     return res.status(201).json({
       message: 'Usuario logueado',
-      data: [{ token }, user],
+      data: { token, user },
     });
   } catch (err) {
     return res.status(404).json({

@@ -11,7 +11,7 @@ import jwtVerify from '../middleware/jwt.middleware.js';
 
 const router = new Router();
 
-router.get('/etiquetas', jwtVerify, isAdmin, getEtiqueta);
+router.get('/etiquetas', jwtVerify, getEtiqueta);
 router.get('/etiquetas/:id', jwtVerify, isAdmin, getEtiquetaById);
 router.put('/etiquetas/:id', jwtVerify, isAdmin, updateEtiqueta);
 router.post('/etiquetas', jwtVerify, isAdmin, createEtiqueta);
